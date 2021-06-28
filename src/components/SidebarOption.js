@@ -1,9 +1,17 @@
 import styled from 'styled-components'
+import { db } from '../firebase'
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 export default function SidebarOption({Icon, title, addRoom}) {
-
+    const [rooms, loading, error] = useCollection(db.collection('rooms'))
+    console.log(rooms);
     const addNewRoom = () => {
-        
+        const roomName = prompt('Enter room name')
+        if(roomName){
+            db.collection('rooms').add({
+                name: roomName
+            })
+        }
     }
     const selectRoom = () => {
 
