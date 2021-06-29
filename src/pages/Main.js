@@ -3,9 +3,12 @@ import Sidebar from '../components/Sidebar'
 import Chat from '../components/Chat'
 import styled from 'styled-components'
 
+
 export default function Main() {
+   
     return (
         <>
+            
             <Header />
             <MainContainer>
             <Sidebar />

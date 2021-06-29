@@ -20,31 +20,37 @@ export default function Chat() {
     )
   
     useEffect(() => {
-        bottomRef.current.scrollIntoView({
+        bottomRef?.current?.scrollIntoView({
             behavior:"smooth"
         })
     },[selectedRoomId,loading])
     
     return (
         <ChatContainer>
-            <ChatHeader>
-                <h3>#{roomInfo?.data().name}</h3>
-            </ChatHeader>
-            <ChatMessages>
-                {roomMessages?.docs.map(doc => {
-                    const { message, timestamp, sender } = doc.data()
-                    return (
-                        <Message 
-                            key={doc.id}
-                            message={message}
-                            timestamp={timestamp}
-                            sender={sender}
-                        />
-                    )
-                })}
-            </ChatMessages>
-            <BottomSpace ref={bottomRef}/>
-            <MessageInput roomId={selectedRoomId} roomName={roomInfo?.data().name} bottomRef={bottomRef}/>
+            {roomInfo && roomMessages && (
+                <>
+                    <ChatHeader>
+                        <h3>#{roomInfo?.data().name}</h3>
+                    </ChatHeader>
+                    <ChatMessages>
+                        {roomMessages?.docs.map(doc => {
+                            const { message, timestamp, sender, senderImage } = doc.data()
+                            return (
+                                <Message 
+                                    key={doc.id}
+                                    message={message}
+                                    timestamp={timestamp}
+                                    sender={sender}
+                                    image={senderImage}
+                                />
+                            )
+                        })}
+                    </ChatMessages>
+                    <BottomSpace ref={bottomRef}/>
+                    <MessageInput roomId={selectedRoomId} roomName={roomInfo?.data().name} bottomRef={bottomRef}/>
+                </>
+             )} 
+
         </ChatContainer>
     )
 }
@@ -63,5 +69,5 @@ const ChatHeader = styled.div`
 const ChatMessages = styled.div`
 `
 const BottomSpace = styled.div`
-    padding-bottom: 100px;
+    padding-bottom: 150px;
 `

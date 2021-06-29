@@ -2,18 +2,21 @@ import styled from 'styled-components'
 import SidebarOption from './SidebarOption'
 import { Avatar } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import { db } from '../firebase'
+import { auth,db } from '../firebase'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import {  useAuthState } from 'react-firebase-hooks/auth'
+import userEvent from '@testing-library/user-event'
 
 
 export default function Sidebar() {
-        const [rooms, loading, error] = useCollection(db.collection('rooms'))
+    const [user] = useAuthState(auth)
+    const [rooms, loading, error] = useCollection(db.collection('rooms'))
 
     return (
         <SidebarContainer>
             <SidebarHeader>
-                <SideAvatar/>
-                <h4>Users Name</h4>
+                <SideAvatar src={user?.photoURL} alt={user?.displayName}/>
+                <h4>{user?.displayName}</h4>
             </SidebarHeader>
             <SidebarOption Icon={AddIcon} title='Add Room' addRoom/>
             {rooms?.docs.map(doc => (

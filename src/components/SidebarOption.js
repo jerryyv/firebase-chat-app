@@ -4,6 +4,7 @@ import { useRoomContext } from '../contexts/RoomContext'
 
 export default function SidebarOption({Icon, title, addRoom, id}) {
     const { selectedRoomId, setSelectedRoomId } = useRoomContext()
+    
     const addNewRoom = () => {
         const roomName = prompt('Enter room name')
         if(roomName){

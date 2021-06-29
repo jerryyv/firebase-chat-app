@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
-export default function Message({message, timestamp, sender}) {
+export default function Message({message, timestamp, sender, image}) {
     return (
         <MessageContainer>
+            {/* <img src={image} alt={sender} /> */}
             <MessageInfo>
                 <h4>
                     {sender}
@@ -21,7 +22,9 @@ const MessageContainer = styled.div`
     padding: 20px;
 
     >img {
-
+        width:40px;
+        border-radius: 5px;
+        margin-right: 10px;
     }
 `
 const MessageInfo = styled.div`

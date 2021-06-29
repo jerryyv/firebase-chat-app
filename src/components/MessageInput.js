@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 import firebase from 'firebase'
-import { db } from '../firebase'
+import { auth,db } from '../firebase'
 import { useState } from 'react'
+import {  useAuthState } from 'react-firebase-hooks/auth'
 
 export default function MessageInput({roomId, roomName, bottomRef}) {
+    const [user] = useAuthState(auth)
     const [messageInput, setMessageInput] = useState('')
+
     const sendMessage = (e) => {
         e.preventDefault()
         
@@ -15,7 +18,8 @@ export default function MessageInput({roomId, roomName, bottomRef}) {
         db.collection('rooms').doc(roomId).collection('messages').add({
             message:messageInput,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            sender:'current user'
+            sender: user.displayName,
+            // senderImage: user.photoURL
         })
 
         bottomRef.current.scrollIntoView({
