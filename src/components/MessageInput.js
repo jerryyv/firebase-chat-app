@@ -3,7 +3,7 @@ import firebase from 'firebase'
 import { db } from '../firebase'
 import { useState } from 'react'
 
-export default function MessageInput({roomId}) {
+export default function MessageInput({roomId, roomName, bottomRef}) {
     const [messageInput, setMessageInput] = useState('')
     const sendMessage = (e) => {
         e.preventDefault()
@@ -18,6 +18,10 @@ export default function MessageInput({roomId}) {
             sender:'current user'
         })
 
+        bottomRef.current.scrollIntoView({
+            behavior:"smooth"
+        })
+
         setMessageInput('')
     }
     
@@ -27,7 +31,7 @@ export default function MessageInput({roomId}) {
                 <input 
                 value={messageInput} 
                 onChange={(e) => setMessageInput(e.target.value)}
-                placeholder={`message`}/>
+                placeholder={`Message #${roomName}`}/>
                 <button hidden type='submit' onClick={sendMessage}>send</button>
             </form>
 
