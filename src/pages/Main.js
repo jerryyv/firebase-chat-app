@@ -1,5 +1,6 @@
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
+import Chat from '../components/Chat'
 import styled from 'styled-components'
 
 export default function Main() {
@@ -8,7 +9,7 @@ export default function Main() {
             <Header />
             <MainContainer>
             <Sidebar />
-
+            <Chat />
             </MainContainer>
         </>
     )

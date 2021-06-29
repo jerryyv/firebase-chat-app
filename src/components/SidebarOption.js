@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import { db } from '../firebase'
-import { useCollection } from 'react-firebase-hooks/firestore'
+import { useRoomContext } from '../contexts/RoomContext'
 
-export default function SidebarOption({Icon, title, addRoom}) {
-    const [rooms, loading, error] = useCollection(db.collection('rooms'))
-    console.log(rooms);
+export default function SidebarOption({Icon, title, addRoom, id}) {
+    const { selectedRoomId, setSelectedRoomId } = useRoomContext()
     const addNewRoom = () => {
         const roomName = prompt('Enter room name')
         if(roomName){
@@ -13,10 +12,13 @@ export default function SidebarOption({Icon, title, addRoom}) {
             })
         }
     }
+
     const selectRoom = () => {
-
+        if(id) {
+            setSelectedRoomId(id)
+        }
     }
-
+   
     return (
         <SidebarOptionContainer
             onClick={addRoom ? addNewRoom : selectRoom}
