@@ -3,14 +3,13 @@ import styled from 'styled-components'
 export default function Message({message, timestamp, sender, image}) {
     return (
         <MessageContainer>
-            {/* <img src={image} alt={sender} /> */}
-            <MessageInfo>
+            <img src={image} alt={sender} /> 
+            <div className="text">
                 <h4>
                     {sender}
-                    {/* <span> {new Date(timestamp?.toDate()).toUTCString()}</span> */}
                 </h4>
                 <p>{message}</p>
-            </MessageInfo>
+            </div>
         </MessageContainer>
     )
 }
@@ -21,12 +20,10 @@ const MessageContainer = styled.div`
     align-items: center;
     padding: 20px;
 
-    >img {
+    img {
         width:40px;
         border-radius: 5px;
         margin-right: 10px;
+        
     }
-`
-const MessageInfo = styled.div`
-
 `

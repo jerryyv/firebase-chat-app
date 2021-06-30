@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <HeaderContainer>
          <h1><AiFillFire /> FireChat</h1>
-         <p onClick={() => auth.signOut()}><FaSignOutAlt /> LogOut</p>
+         <h3 onClick={() => auth.signOut()}><FaSignOutAlt /> LogOut</h3>
         </HeaderContainer>
     )
 }
@@ -17,23 +17,30 @@ const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-    background-color: var(--main-color);
+    padding: 0 30px;
+    background-color: #2f3135;
     position: sticky;
-    z-index: 999;
+    top:0;
+    height: 80px; 
+    border-bottom: 3px solid #26282c;
 
-    >h1 {
+    h1 {
         display: flex;
         align-items: center;
     }
 
-    >p {
+    h3 {
         display: flex;
         align-items: center;
         cursor: pointer;
-
-        >svg {
+        color: gray;
+        
+        svg {
             margin-right:2px;
+        }
+
+        :hover{
+            color: white;
         }
     }
 `

@@ -8,7 +8,6 @@ export default function Main() {
    
     return (
         <>
-            
             <Header />
             <MainContainer>
             <Sidebar />
@@ -20,5 +19,5 @@ export default function Main() {
 
 const MainContainer = styled.div`
     display: flex;
-    height: 100vh
+    height: calc(100vh - 80px)
 `

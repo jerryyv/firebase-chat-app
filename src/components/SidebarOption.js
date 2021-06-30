@@ -1,42 +1,27 @@
 import styled from 'styled-components'
-import { db } from '../firebase'
 import { useRoomContext } from '../contexts/RoomContext'
 
-export default function SidebarOption({Icon, title, addRoom, id}) {
+
+export default function SidebarOption({ title, roomId}) {
     const { selectedRoomId, setSelectedRoomId } = useRoomContext()
-    
-    const addNewRoom = () => {
-        const roomName = prompt('Enter room name')
-        if(roomName){
-            db.collection('rooms').add({
-                name: roomName
-            })
-        }
-    }
 
     const selectRoom = () => {
-        if(id) {
-            setSelectedRoomId(id)
+        if(roomId) {
+            setSelectedRoomId(roomId)
         }
     }
    
+    console.log(selectedRoomId)
     return (
         <SidebarOptionContainer
-            onClick={addRoom ? addNewRoom : selectRoom}
+            onClick={selectRoom}
+            background={selectedRoomId===roomId?'#26282c':''}
+            color={selectedRoomId===roomId?'white':''}
         >
-            {Icon && <Icon fontSize='small'/>}
-            {Icon ? (
-                <h3>{title}</h3>
-            ):(
-                <SidebarOptionRoom>
-                    <h3><span>#</span> {title}</h3>
-                </SidebarOptionRoom>
-            )
-        }
+        <h3><span>#</span> {title}</h3>
         </SidebarOptionContainer>
     )
 }
-
 
 const SidebarOptionContainer = styled.div`
     display: flex;
@@ -44,15 +29,16 @@ const SidebarOptionContainer = styled.div`
     cursor: pointer;
     font-size: 12px;
     padding: 10px;
-    >h3 {
+    background: ${props => props.background};
+    color: ${props => props.color};
+
+    h3 {
         padding-left:5px
     }
-    :hover{
-        opacity: 0.9;
-        background: red;
+
+    :hover {
+        background: #26282c;
+        color: white;
+
     }
-`
-
-const SidebarOptionRoom = styled.div`
-
 `

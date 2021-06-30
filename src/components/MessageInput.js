@@ -19,7 +19,7 @@ export default function MessageInput({roomId, roomName, bottomRef}) {
             message:messageInput,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             sender: user.displayName,
-            // senderImage: user.photoURL
+            image: user.photoURL
         })
 
         bottomRef.current.scrollIntoView({
@@ -35,24 +35,24 @@ export default function MessageInput({roomId, roomName, bottomRef}) {
                 <input 
                 value={messageInput} 
                 onChange={(e) => setMessageInput(e.target.value)}
-                placeholder={`Message #${roomName}`}/>
+                placeholder={`Message #${roomName}`}
+                />
                 <button hidden type='submit' onClick={sendMessage}>send</button>
             </form>
-
         </MessageInputContainer>
     )
 }
 
 const MessageInputContainer = styled.div`
-    padding-top:20px;
+    /* padding-top:25px; */
 
-    >form {
-        position: relative;
+    form {
+        /* position: relative; */
         display: flex;
         justify-content: center;
     }
 
-    >form >input {
+    form input {
         position: fixed;
         border: 1px solid gray;
         border-radius: 10px;

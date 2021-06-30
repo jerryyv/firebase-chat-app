@@ -6,6 +6,7 @@ import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { db } from '../firebase'
 import { useRef,useEffect } from 'react'
 
+
 export default function Chat() {
     const { selectedRoomId } = useRoomContext()
     const bottomRef = useRef()
@@ -23,25 +24,24 @@ export default function Chat() {
         bottomRef?.current?.scrollIntoView({
             behavior:"smooth"
         })
-    },[selectedRoomId,loading])
+    },[selectedRoomId,loading,roomMessages])
     
     return (
         <ChatContainer>
             {roomInfo && roomMessages && (
                 <>
                     <ChatHeader>
-                        <h3>#{roomInfo?.data().name}</h3>
+                        <h2># {roomInfo?.data().name}</h2>
                     </ChatHeader>
                     <ChatMessages>
                         {roomMessages?.docs.map(doc => {
-                            const { message, timestamp, sender, senderImage } = doc.data()
+                            const { message, sender, image } = doc.data()
                             return (
                                 <Message 
                                     key={doc.id}
                                     message={message}
-                                    timestamp={timestamp}
                                     sender={sender}
-                                    image={senderImage}
+                                    image={image}
                                 />
                             )
                         })}
@@ -50,7 +50,6 @@ export default function Chat() {
                     <MessageInput roomId={selectedRoomId} roomName={roomInfo?.data().name} bottomRef={bottomRef}/>
                 </>
              )} 
-
         </ChatContainer>
     )
 }
@@ -60,14 +59,20 @@ const ChatContainer = styled.div`
  flex: 0.75;
  flex-grow: 1;
  overflow-y: scroll;
+ background-color: #363a3f;
 `
 const ChatHeader = styled.div`
-    padding: 30px;
-    border-bottom: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    /* height: 80px; */
+    padding: 20px 30px;
+    /* border-bottom: 1px solid #26282c; */
     text-transform: lowercase;
+    color: gray 
 `
 const ChatMessages = styled.div`
+    color: white;
 `
 const BottomSpace = styled.div`
-    padding-bottom: 150px;
+    padding-bottom: 200px;
 `
