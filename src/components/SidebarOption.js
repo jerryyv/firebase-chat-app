@@ -1,24 +1,47 @@
 import styled from 'styled-components'
 import { useRoomContext } from '../contexts/RoomContext'
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { db } from '../firebase'
 
 
 export default function SidebarOption({ title, roomId}) {
     const { selectedRoomId, setSelectedRoomId } = useRoomContext()
+    
 
-    const selectRoom = () => {
+    const selectRoom = () => { 
         if(roomId) {
             setSelectedRoomId(roomId)
+            console.log('selected')
+        }
+    }
+    // const deleteRoom = (e) => {
+    //     e.stopPropagation()
+    //     db.collection("rooms").doc(roomId).delete()
+    // }
+    const editRoom = (e) => {
+        e.stopPropagation()
+        const newRoomName = prompt('Edit room name')
+        if(newRoomName){
+            db.collection("rooms").doc(roomId).update({
+                name: newRoomName
+            })
         }
     }
    
-    console.log(selectedRoomId)
+  
     return (
         <SidebarOptionContainer
             onClick={selectRoom}
             background={selectedRoomId===roomId?'#26282c':''}
             color={selectedRoomId===roomId?'white':''}
         >
-        <h3><span>#</span> {title}</h3>
+        <h3># {title}</h3>
+        <div className="roomIcons">
+            <EditIcon fontSize="small" onClick={editRoom}/>
+            {/* <DeleteIcon fontSize="small" onClick={deleteRoom}/> */}
+        </div>
+        
         </SidebarOptionContainer>
     )
 }
@@ -26,8 +49,9 @@ export default function SidebarOption({ title, roomId}) {
 const SidebarOptionContainer = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 13px;
     padding: 10px;
     background: ${props => props.background};
     color: ${props => props.color};
@@ -40,5 +64,9 @@ const SidebarOptionContainer = styled.div`
         background: #26282c;
         color: white;
 
+    }
+
+    svg:hover {
+        color: orange;
     }
 `

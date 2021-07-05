@@ -5,7 +5,11 @@
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
-body {
-  --main-color: #e65100;
+/* body {
   overflow: hidden;
+} */
+
+::-webkit-scrollbar {
+  width: 0;
+  /* background: transparent; */
 }

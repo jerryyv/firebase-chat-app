@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export default function Message({message, timestamp, sender, image}) {
+export default function Message({message, sender, image}) {
     return (
         <MessageContainer>
             <img src={image} alt={sender} /> 

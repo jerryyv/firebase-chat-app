@@ -27,6 +27,10 @@ const HeaderContainer = styled.div`
     h1 {
         display: flex;
         align-items: center;
+
+        svg {
+            color: orange;
+        }
     }
 
     h3 {

@@ -6,7 +6,6 @@ import { useCollection, useDocument } from 'react-firebase-hooks/firestore'
 import { db } from '../firebase'
 import { useRef,useEffect } from 'react'
 
-
 export default function Chat() {
     const { selectedRoomId } = useRoomContext()
     const bottomRef = useRef()
@@ -14,7 +13,7 @@ export default function Chat() {
     const [roomInfo] = useDocument(
       selectedRoomId && db.collection('rooms').doc(selectedRoomId)
     )
-    const [roomMessages,loading] = useCollection(
+    const [roomMessages] = useCollection(
         selectedRoomId && 
         db.collection('rooms').doc(selectedRoomId).collection('messages')
         .orderBy('timestamp', 'asc')
@@ -24,11 +23,14 @@ export default function Chat() {
         bottomRef?.current?.scrollIntoView({
             behavior:"smooth"
         })
-    },[selectedRoomId,loading,roomMessages])
+    },[roomMessages])
+
     
+    console.log(roomMessages)
+    console.log(roomInfo && roomMessages)
     return (
         <ChatContainer>
-            {roomInfo && roomMessages && (
+            {roomInfo && (
                 <>
                     <ChatHeader>
                         <h2># {roomInfo?.data().name}</h2>
@@ -64,9 +66,7 @@ const ChatContainer = styled.div`
 const ChatHeader = styled.div`
     display: flex;
     align-items: center;
-    /* height: 80px; */
     padding: 20px 30px;
-    /* border-bottom: 1px solid #26282c; */
     text-transform: lowercase;
     color: gray 
 `

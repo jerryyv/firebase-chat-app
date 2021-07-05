@@ -11,10 +11,6 @@ export default function MessageInput({roomId, roomName, bottomRef}) {
     const sendMessage = (e) => {
         e.preventDefault()
         
-        if(!roomId){
-            return
-        }
-
         db.collection('rooms').doc(roomId).collection('messages').add({
             message:messageInput,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
