@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { useRoomContext } from '../contexts/RoomContext'
-import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { db } from '../firebase'
 
@@ -15,11 +14,8 @@ export default function SidebarOption({ title, roomId}) {
             console.log('selected')
         }
     }
-    // const deleteRoom = (e) => {
-    //     e.stopPropagation()
-    //     db.collection("rooms").doc(roomId).delete()
-    // }
-    const editRoom = (e) => {
+ 
+    const editRoomName = (e) => {
         e.stopPropagation()
         const newRoomName = prompt('Edit room name')
         if(newRoomName){
@@ -34,12 +30,11 @@ export default function SidebarOption({ title, roomId}) {
         <SidebarOptionContainer
             onClick={selectRoom}
             background={selectedRoomId===roomId?'#26282c':''}
-            color={selectedRoomId===roomId?'white':''}
+            color={selectedRoomId===roomId?'white':'gray'}
         >
         <h3># {title}</h3>
         <div className="roomIcons">
-            <EditIcon fontSize="small" onClick={editRoom}/>
-            {/* <DeleteIcon fontSize="small" onClick={deleteRoom}/> */}
+            <button onClick={editRoomName}><EditIcon fontSize="small" /></button>    
         </div>
         
         </SidebarOptionContainer>
@@ -66,7 +61,15 @@ const SidebarOptionContainer = styled.div`
 
     }
 
-    svg:hover {
-        color: orange;
+    button {
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: ${props => props.color}
     }
+
+    button:hover {
+        color: orange;              
+    }       
 `

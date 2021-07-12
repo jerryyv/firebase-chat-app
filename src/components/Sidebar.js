@@ -46,7 +46,7 @@ export default function Sidebar() {
 
 
 const SidebarContainer = styled.div`
-    background-color: #2f3135;
+    background-color: var(--dark-color);
     color: gray;
     flex: 0.25;
     max-width: 260px;
@@ -59,7 +59,7 @@ const SidebarHeader = styled.div`
     justify-content: center;
     text-align: center;
     padding: 10px 0;
-    border-bottom: 1px solid #26282c;
+    border-bottom: 1px solid var(--border-color);
 `
 
 const SideAvatar = styled(Avatar)`
@@ -72,7 +72,7 @@ const SidebarAddBtn = styled.div`
     font-size: 12px;
     padding:10px;
     justify-content: space-between;
-    border-bottom: 1px solid #26282c;
+    border-bottom: 1px solid var(--border-color);
    
     .title {
         display: flex;

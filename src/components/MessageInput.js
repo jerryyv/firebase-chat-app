@@ -40,10 +40,8 @@ export default function MessageInput({roomId, roomName, bottomRef}) {
 }
 
 const MessageInputContainer = styled.div`
-    /* padding-top:25px; */
-
     form {
-        /* position: relative; */
+        
         display: flex;
         justify-content: center;
     }

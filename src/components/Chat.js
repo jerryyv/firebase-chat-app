@@ -26,8 +26,6 @@ export default function Chat() {
     },[roomMessages])
 
     
-    console.log(roomMessages)
-    console.log(roomInfo && roomMessages)
     return (
         <ChatContainer>
             {roomInfo && (
@@ -61,7 +59,7 @@ const ChatContainer = styled.div`
  flex: 0.75;
  flex-grow: 1;
  overflow-y: scroll;
- background-color: #363a3f;
+ background-color: var(--main-bg-color);
 `
 const ChatHeader = styled.div`
     display: flex;
