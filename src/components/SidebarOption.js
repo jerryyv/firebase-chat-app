@@ -56,7 +56,7 @@ const SidebarOptionContainer = styled.div`
     }
 
     :hover {
-        background: #26282c;
+        background: var(--border-color);
         color: white;
 
     }

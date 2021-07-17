@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import SidebarOption from './SidebarOption'
 import { Avatar } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { auth,db } from '../firebase'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import {  useAuthState } from 'react-firebase-hooks/auth'
@@ -29,11 +28,8 @@ export default function Sidebar() {
                 <h4>{user?.displayName}</h4>
             </SidebarHeader>
             <SidebarAddBtn onClick={addNewRoom}>
-                <div className="title">
-                    <ExpandMoreIcon fontSize="small" />
-                    <h3>Chat Rooms</h3>
-                </div>
-                <AddIcon fontSize="small"/>
+                <AddIcon fontSize="md"/>
+                <span>Create Room</span>
             </SidebarAddBtn>
             {rooms?.docs.map(doc => (
                 <SidebarOption key={doc.id} roomId={doc.id} title={doc.data().name}
@@ -65,27 +61,28 @@ const SidebarHeader = styled.div`
 const SideAvatar = styled(Avatar)`
    margin-bottom: 5px;
 `
-const SidebarAddBtn = styled.div`
+const SidebarAddBtn = styled.button`
     display: flex;
     align-items: center;
-    cursor: pointer;
-    font-size: 12px;
-    padding:10px;
-    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     border-bottom: 1px solid var(--border-color);
-   
-    .title {
-        display: flex;
-        align-items: center;
-    }
-    
-    h3 {
-        padding-left:5px;
-    }
+    background: none;
+    cursor: pointer;
+    color: gray;
+    width: 100%;
 
     :hover {
-        background: #26282c;
-        color: white;
-
+        background-color: var(--border-color);
+        color: white
     }
+    
+    span {
+        margin-left: 5px;
+    }
+
 `
