@@ -32,11 +32,10 @@ export default function SidebarOption({ title, roomId}) {
             background={selectedRoomId===roomId?'#26282c':''}
             color={selectedRoomId===roomId?'white':'gray'}
         >
-        <h3># {title}</h3>
-        <div className="roomIcons">
-            <button onClick={editRoomName}><EditIcon fontSize="small" /></button>    
-        </div>
-        
+            <h3># {title}</h3>
+            <div className="roomIcons">
+                <button onClick={editRoomName}><EditIcon fontSize="small" /></button>    
+            </div>
         </SidebarOptionContainer>
     )
 }

@@ -10,8 +10,8 @@ export default function Main() {
         <>
             <Header />
             <MainContainer>
-            <Sidebar />
-            <Chat />
+                <Sidebar />
+                <Chat />
             </MainContainer>
         </>
     )

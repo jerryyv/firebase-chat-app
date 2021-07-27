@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { RoomProvider } from './contexts/RoomContext'
 import Main from './pages/Main'
 import Login from './pages/Login'
@@ -19,13 +18,9 @@ function App() {
     return <Login />
   }
   return (
-    <Router>
         <RoomProvider>
-        <Switch>
-          <Route exact path="/" component={Main} />
-        </Switch>
+           <Main />
         </RoomProvider>
-    </Router>
   );
 }
 
